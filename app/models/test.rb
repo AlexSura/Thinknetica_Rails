@@ -3,8 +3,12 @@ class Test < ApplicationRecord
   has_many :tests, through: :users
 
   def self.list(string)
-
-    testt = Test.joins('JOIN categories ON tests.category_id = category.id')
+    cat = Category.where("title == ?", string)
+    id_categories = cat.pluck(:id)
+    testt = Test.joins('JOIN categories ON tests.category_id = categories.id')
+    testt = testt.where("categories.id == ?", id_categories)
+    testt = testt.order(title: :desc)
+    testt = testt.pluck("title")
   end
 end
 
