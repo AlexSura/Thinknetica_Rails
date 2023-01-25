@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_many :tests
-  has_many :users, through: :tests
 
-  def history(integer)
-    pp Test.where("level == ?", integer)
+  def self.history(level)
+    name_test = Test.joins("JOIN users ON users.id = tests.id WHERE tests.level = '#{level}'")
+    name_test.pluck("title")
   end
 end

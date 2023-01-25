@@ -5,10 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+categories = Category.create([{title: 'junior'},{title: 'midle'}])
 tests = Test.create([{title: 'PHP', level: 1, category_id: 1}, {title: 'JS', level: 1, category_id: 1}, {title: 'React', level: 2, category_id: 2}])
 questions = Question.create([{body: "что то про тест написано но не точно"}])
 answers = Answer.create([{correct: true, body:'ответ на вопрос'}])
-categories = Category.create([{title: 'junior', id: 1},{title: 'midle', id: 2}])
 users = User.create([{name: 'Pavel', age: 22}, {name: 'Roma', age: 33}])
 
 
