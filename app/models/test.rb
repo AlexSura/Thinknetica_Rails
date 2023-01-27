@@ -1,5 +1,5 @@
 class Test < ApplicationRecord
-  has_many :users
+  has_and_belongs_to_many :users
 
   def self.arr_categories(name_category)
     testt = Test.joins("JOIN categories ON tests.category_id = categories.id WHERE categories.title = '#{name_category}'")
