@@ -1,13 +1,13 @@
 class CreateQuestions < ActiveRecord::Migration[6.1]
   def change
     create_table :questions do |t|
-      t.text :body
+      t.text :body, :null false
       t.integer :test_id
+      t.reference :tests, :questions, foreign_key: true
 
       t.timestamps
     end
 
-    change_column_null(:questions, :body, false)
-    add_reference :tests, :questions, foreign_key: true
+    #add_reference :tests, :questions, foreign_key: true
   end
 end
