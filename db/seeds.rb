@@ -5,10 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Category.create([{title: 'junior'},{title: 'midle'}])
-Test.create([{title: 'PHP', level: 1, category_id: nil}, {title: 'JS', level: 1, category_id: nil }, {title: 'React', level: 2, category_id: nil}])
-Question.create([{body: "что то про тест написано но не точно"}])
-Answer.create([{correct: true, body:'ответ на вопрос'}])
-User.create([{name: 'Pavel', age: 22}, {name: 'Roma', age: 33}])
+categories = Category.create([{title: 'junior'},{title: 'midle'}])
+tests = Test.create([{title: 'PHP', level: 1, category_id: categories[0].id}, {title: 'JS', level: 1, category_id: categories[0].id }, {title: 'React', level: 2, category_id: categories[1].id}])
+questions = Question.create([{body: "что то про тест написано но не точно"}])
+answers = Answer.create([{correct: true, body:'ответ на вопрос'}])
+users = User.create([{name: 'Pavel', age: 22}, {name: 'Roma', age: 33}])
 
 

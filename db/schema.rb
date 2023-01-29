@@ -15,9 +15,10 @@ ActiveRecord::Schema.define(version: 2023_01_27_051419) do
   create_table "answers", force: :cascade do |t|
     t.boolean "correct", default: false
     t.text "body", null: false
-    t.integer "question_id"
+    t.integer "questions_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["questions_id"], name: "index_answers_on_questions_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -28,35 +29,38 @@ ActiveRecord::Schema.define(version: 2023_01_27_051419) do
 
   create_table "questions", force: :cascade do |t|
     t.text "body", null: false
-    t.integer "test_id"
+    t.integer "tests_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "answers_id"
-    t.index ["answers_id"], name: "index_questions_on_answers_id"
+    t.index ["tests_id"], name: "index_questions_on_tests_id"
   end
 
   create_table "tests", force: :cascade do |t|
     t.string "title", null: false
     t.integer "level", default: 0, null: false
-    t.integer "category_id"
+    t.integer "categories_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "questions_id"
-    t.index ["questions_id"], name: "index_tests_on_questions_id"
+    t.index ["categories_id"], name: "index_tests_on_categories_id"
   end
 
   create_table "tests_users", id: false, force: :cascade do |t|
-    t.integer "test_id"
-    t.integer "user_id"
+    t.integer "tests_id"
+    t.integer "users_id"
+    t.index ["tests_id"], name: "index_tests_users_on_tests_id"
+    t.index ["users_id"], name: "index_tests_users_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.integer "age"
+    t.string "name", null: false
+    t.integer "age", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "questions", "answers", column: "answers_id"
-  add_foreign_key "tests", "questions", column: "questions_id"
+  add_foreign_key "answers", "questions", column: "questions_id"
+  add_foreign_key "questions", "tests", column: "tests_id"
+  add_foreign_key "tests", "categories", column: "categories_id"
+  add_foreign_key "tests_users", "tests", column: "tests_id"
+  add_foreign_key "tests_users", "users", column: "users_id"
 end
