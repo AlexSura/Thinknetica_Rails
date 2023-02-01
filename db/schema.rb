@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2023_01_27_051419) do
     t.string "title", null: false
     t.integer "level", default: 0, null: false
     t.integer "category_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_tests_on_category_id"
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(version: 2023_01_27_051419) do
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.integer "age", null: false
+    t.integer "test_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
