@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_27_051419) do
+ActiveRecord::Schema.define(version: 2023_02_02_083705) do
 
   create_table "answers", force: :cascade do |t|
     t.boolean "correct", default: false
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2023_01_27_051419) do
   create_table "tests_users", id: false, force: :cascade do |t|
     t.integer "test_id"
     t.integer "user_id"
+    t.boolean "authorship_id"
     t.index ["test_id"], name: "index_tests_users_on_test_id"
     t.index ["user_id"], name: "index_tests_users_on_user_id"
   end
