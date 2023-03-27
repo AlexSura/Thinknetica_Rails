@@ -1,5 +1,5 @@
 class Test < ApplicationRecord
-  belongs_to :author, class_name: 'User'
+  belongs_to :author, class_name: 'User', foreign_key: :user_id
 
   belongs_to :category 
   
@@ -7,9 +7,10 @@ class Test < ApplicationRecord
   has_many :tests_users
   has_many :users, through: :tests_users
 
-  def arr_categories(name_category)
-    x = "#{name_category}"
-    testt = Test.all.joins(:category).where(category: { title: x }).order(title: :desc)
+  def self.arr_categories(name_category)
+    
+    Test.joins(:category).where(category: { title: name_category }).order(title: :desc).pluck(:title)
+    
   end
 end
 
