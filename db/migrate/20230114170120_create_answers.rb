@@ -6,6 +6,7 @@ class CreateAnswers < ActiveRecord::Migration[6.1]
       t.references :question, foreign_key: true
 
       t.timestamps
+
     end
     #change_column_null(:answers, :body, false)
     #change_column_default(:answers, :correct, from:nil, to: false)

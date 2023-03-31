@@ -7,11 +7,26 @@ class Test < ApplicationRecord
   has_many :tests_users
   has_many :users, through: :tests_users
 
+  validates :title, presence: true
+                    #uniqueness: true
+
+  scope :easy, -> { where(level: 0..1) }
+  scope :medium, -> { where(level: 2..4) }
+  scope :heavy, -> { where(level: 5..Float::INFINITY) }
+  scope :arr_categories, -> (name_category){joins(:category).where(category: { title: name_category}).order(title: :desc)}
+
+  validates :title, presence: true
+  validates :level, numericality: { greater_than: 0, only_integer: true }
+  validates :title, uniqueness: { scope: :level }
+
+=begin
   def self.arr_categories(name_category)
     
     Test.joins(:category).where(category: { title: name_category }).order(title: :desc).pluck(:title)
     
   end
+=end
+
 end
 
 
