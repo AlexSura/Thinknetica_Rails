@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :name, null: false
       t.integer :age, null: false
 
+
       t.timestamps
     end
   end
