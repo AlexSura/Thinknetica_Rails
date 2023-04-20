@@ -1,4 +1,7 @@
 class QuestionsController < ApplicationController
+  
+  rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
+  
   before_action :set_test, only: %i[index new create]
   before_action :set_question, only: %i[show destroy]
 
@@ -15,14 +18,18 @@ class QuestionsController < ApplicationController
 
   def create
     question = @test.questions.create(question_param)
-    render plain: question
+    if question.save 
+      render plain: "вопрос создан"
+    else 
+      render plain: "вопрос не валидный"
+    end
+
   end
 
   def destroy
     @question.destroy
   end
 
-  rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
 
   private
 
@@ -35,7 +42,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_param
-    params.require(:question).permit(:body, :test_id)
+    params.require(:question).permit(:body)
   end
 
   def rescue_with_question_not_found
