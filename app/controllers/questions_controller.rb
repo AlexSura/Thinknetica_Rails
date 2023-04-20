@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
   def new; end
 
   def create
-    question = @test.questions.create(question_param)
+    question = @test.questions.new(question_param)
     if question.save 
       render plain: "вопрос создан"
     else 
