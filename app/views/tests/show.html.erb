@@ -1,0 +1,32 @@
+<% if @questions.present? %>
+<p><%= "Test: #{@test.title}, Level: #{@test.level}" %></p>
+
+<%= link_to 'Back', tests_path %>
+<%= link_to 'Edit test', edit_test_path(@test) %>
+<%= link_to 'Delet test', edit_test_path(@test),
+			method: :delete, data: {confirm: "Вы уверены что хотите удалить тест?"} %>
+
+<h2>Test questions</h2>
+
+<table>
+	<tr>
+		<th>id</th>
+		<th>Body</th>
+	</tr>
+
+	<% @questions.each do |question| %>
+	<tr>
+		<td><%= question.id %></td>
+		<td><%= question.body %></td>
+		<td>
+			<%= link_to 'Delete', question_path(question),
+						method: :delete, date: {confirm: "Вы уверены что хотите удалить тест?"} %>
+			<%= link_to	'Edit', edit_test_path(question) %>			
+		</td>
+	</tr>
+	<% end %>
+</table>
+<%= link_to 'New question', new_test_question_path(@test) %>
+<% else %>
+	<p> У данного теста нет вопросов  </p>
+<% end %>		
