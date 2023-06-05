@@ -1,13 +1,13 @@
 class TestPassage < ApplicationRecord
   SUCCESSFUL_RATE = 85
   
-  belongs_to :user
   belongs_to :test
+  belongs_to :user
   belongs_to :current_question, class_name: 'Question', optional: true
 
   before_validation :before_validation_set_question, on: %i[create update]
 
-  def accept!(answers_ids)
+  def accept!(answer_ids)
     self.correct_question += 1 if correct_answer?(answer_ids)
   
     save!
@@ -36,7 +36,7 @@ class TestPassage < ApplicationRecord
   end
 
   def correct_answers
-    current_question.answers.correct_answers
+    current_question.answers.true_answer
   end
 
   def next_question
