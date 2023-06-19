@@ -1,11 +1,11 @@
 class Test < ApplicationRecord
-  belongs_to :author, class_name: 'User', foreign_key: :user_id
+  belongs_to :author, class_name: 'User'
 
   belongs_to :category 
   
-  has_many :questions
-  has_many :tests_users
-  has_many :users, through: :tests_users
+  has_many :questions, dependent: :destroy
+  has_many :test_passages, dependent: :destroy
+  has_many :users, through: :test_passages
 
   validates :title, presence: true
                     #uniqueness: true
