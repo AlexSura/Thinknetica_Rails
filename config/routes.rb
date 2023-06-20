@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   resources :test_passages, only: %i[show update] do
     get :result, on: :member
   end
+  
+  resources :sessions, only: %i[create]
+
+  get :logout, to: 'sessions#destroy'
 
   root 'tests#index'
   
@@ -20,6 +24,5 @@ Rails.application.routes.draw do
 
   get :login, to: 'sessions#new'
 
-  resources :session, only: %i[create destroy]
 end
   
