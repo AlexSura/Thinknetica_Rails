@@ -8,6 +8,8 @@ module ApplicationHelper
   end
 
   def flash_message(key)
-    content_tag :p, flash[key], class: 'flash #{key}' if flash[key]
+    flash.map do |key, msg|
+    content_tag :p, msg 
   end
+end
 end
