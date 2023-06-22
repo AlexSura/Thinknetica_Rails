@@ -8,7 +8,7 @@ class TestPassage < ApplicationRecord
   before_validation :before_validation_set_question, on: %i[create update]
 
   def accept!(answer_ids)
-    self.correct_question += 1 if correct_answer?(answer_ids)
+    self.correct_questions += 1 if correct_answer?(answer_ids)
   
     save!
   end
@@ -22,7 +22,7 @@ class TestPassage < ApplicationRecord
   end
 
   def percentage_result
-    self.correct_question.to_f / test.questions.count * 100
+    self.correct_questions.to_f / test.questions.count * 100
   end
 
   private

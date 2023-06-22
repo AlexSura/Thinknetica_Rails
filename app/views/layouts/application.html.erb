@@ -7,10 +7,17 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <% #javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <p align='left'> <%= link_to 'TestGuru', root_path %> </p>
+
+    <%= render 'shared/navbar' %>
+
     <%= yield %>
+
+
   </body>
-  <%= render 'shared/footer' %>
+    <%= render 'shared/footer' %>
 </html>
